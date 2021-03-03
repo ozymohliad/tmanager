@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/wait.h>
 #include <string.h>
 #include <stdbool.h>
 #include <xcb/xcb.h>
@@ -505,9 +506,11 @@ void delete_node(xinfo_t *xinfo, node_t *node)
 	if (isroot(node)) return;
 
 	xcb_destroy_window(xinfo->conn, node->id);
+
 	if (node->pid)
 	{
 		kill(node->pid, SIGTERM);
+		waitpid(node->pid, NULL, 0);
 	}
 
 	free(node);
@@ -575,8 +578,8 @@ node_t *remove_redundant(xinfo_t *xinfo, node_t *container)
 		}
 
 		// Remove child from screen and memory
-		child->children = NULL;
-		delete_node(xinfo, child);
+		xcb_destroy_window(xinfo->conn, child->id);
+		free(child);
 		
 		children = count_children(container);
 	}

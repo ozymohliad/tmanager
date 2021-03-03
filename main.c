@@ -4,12 +4,11 @@
 #include <string.h>
 #include <xcb/xcb.h>
 #include <time.h>
+#include <signal.h>
 
 #include "types.h"
 #include "config.h"
 #include "funcs.h"
-
-// TODO explicitly initialize values to 0/NULL
 
 // Configures given root node and opens a window for it
 int init_root_node(xinfo_t *xinfo, node_t *node)
@@ -31,7 +30,6 @@ int init_root_node(xinfo_t *xinfo, node_t *node)
 // Initial configuration
 int start(xinfo_t *xinfo, context_t *context)
 {
-	// TODO delete this line - it's for testing
 	srand(time(0)); 
 
 	// Establish an X connection and get screen data

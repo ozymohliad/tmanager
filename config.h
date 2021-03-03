@@ -9,7 +9,7 @@
 #define DEFAULT_Y		0
 #define DEFAULT_WIDTH	750
 #define DEFAULT_HEIGHT	500
-#define BORDER			4
+#define BORDER			2
 #define BORDER_COLOR	0xffb555
 
 #define RESIZE_METHOD		0	// 0 - PERCENT, 1 (or any non-zero int) - PIXEL
